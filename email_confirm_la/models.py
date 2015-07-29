@@ -135,6 +135,7 @@ class EmailConfirmation(models.Model):
             'email': self.email,
             'confirmation_key': self.confirmation_key,
             'confirmation_url': self.get_confirmation_url(),
+            'contact': self.content_object,
         }
         if isinstance(template_context, dict):
             template_context = dict(default_template_context.items() + template_context.items())  # merge dictionaries
