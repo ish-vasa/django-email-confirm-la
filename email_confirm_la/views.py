@@ -7,6 +7,8 @@ from django.shortcuts import render
 from email_confirm_la.models import EmailConfirmation
 from email_confirm_la.exceptions import EmailConfirmationExpired
 
+from worldsfair.apps.contacts.views import FullWallView
+
 
 def confirm_email(request, confirmation_key):
     try:
@@ -17,6 +19,7 @@ def confirm_email(request, confirmation_key):
 
     context = {
         'email_confirmation': email_confirmation,
+        'email_confirm': True,
     }
 
-    return render(request, 'email_confirm_la/email_confirm_success.html', context)
+    return FullWallView.as_view()(request, email_confirm=True)
