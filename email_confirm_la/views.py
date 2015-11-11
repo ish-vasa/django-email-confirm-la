@@ -3,12 +3,11 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from email_confirm_la.models import EmailConfirmation
 from email_confirm_la.exceptions import EmailConfirmationExpired
-
-from worldsfair.apps.contacts.views import WallView
-
 
 def confirm_email(request, confirmation_key):
     try:
@@ -22,4 +21,4 @@ def confirm_email(request, confirmation_key):
         'email_confirm': True,
     }
 
-    return WallView.as_view()(request, email_confirm=True)
+    return HttpResponseRedirect(reverse('confirm'))
